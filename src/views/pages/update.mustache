@@ -1,0 +1,14 @@
+{{>partials/header}}
+<fieldset>
+    <legend>Atualizar Usuário</legend>
+    <form action="/action-update" method="POST">
+        <input type="hidden" name="id" value="{{ id }}" />
+        <input type="text" name="name" value="{{ name }}" />
+        <input type="text" name="age" value="{{ age }}" />
+        <input type="submit" value="Inserir Usuário" />
+    </form>
+</fieldset>
+<button type="button" onclick="history.go(-1)">Voltar</button>
+{{>partials/footer}}
+        
+        

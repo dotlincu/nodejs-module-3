@@ -7,25 +7,20 @@ Opa {{name}} {{lastName}}, tudo bem?
 {{^showOld}}
     Beleza?
 {{/showOld}}
-
-<hr/>
-<fieldset>
-    <legend>Adicionar novo usuário</legend>
-    <form method="POST" action="/novousuario">
-        <input type="text" name="name" placeholder="Digite seu nome" /><br/><br/>
-        <input type="number" name="age" placeholder="Digite sua idade" /><br/><br/>
-        <input type="submit" value="Inserir usuário" />        
-    </form>
-</fieldset>
-        
-
- 
+    
 <hr/>
 <h2>Usuários do banco</h2>
 <ul>
     {{#users}}
-        <li>{{name}} - {{age}}y </li>
+        <li>
+            {{name}} (Primeira Letra: {{ firstLetterOfName }}) - {{age}}y &emsp;
+            <a href="/user/{{ id }}/addAge" >Mais</a> &ensp;
+            <a href="/user/{{ id }}/subAge" >Menos</a> &ensp;
+            <a href="/user/{{ id }}/update" >Editar</a> &ensp;
+            <a href="/user/{{ id }}/delete" >Excluir</a>
+        </li>
     {{/users}}
+    <a href="/user/create" >Adicionar</a>
 </ul> 
 
 

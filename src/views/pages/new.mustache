@@ -1,0 +1,13 @@
+{{>partials/header}}
+<fieldset>
+    <legend>Adicionar novo usuário</legend>
+    <form method="POST" action="/action-create">
+        <input type="text" name="name" placeholder="Digite seu nome" /><br/><br/>
+        <input type="number" name="age" placeholder="Digite sua idade" /><br/><br/>
+        <input type="submit" value="Inserir usuário" />        
+    </form>
+</fieldset>
+<button type="button" onclick="history.go(-1)">Voltar</button>
+{{>partials/footer}}
+        
+        

@@ -15,11 +15,21 @@ export const User = sequelize.define<UserInstance>("User", {
         autoIncrement: true
     },
     name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        get() {
+            return this.getDataValue('name').toUpperCase();
+        },
+    },
+    firstLetterOfName: {
+        type: DataTypes.VIRTUAL,
+        get() {
+            let name: string = this.getDataValue('name');
+            return name.charAt(0);
+        },
     },
     age: {
         type: DataTypes.INTEGER,
-        defaultValue: 18
+        defaultValue: 18,
     }
 }, {
     tableName: 'users',

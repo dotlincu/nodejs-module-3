@@ -4,18 +4,23 @@ import { User } from '../models/User';
 import { Op } from 'sequelize';
 
 export const home = async (req: Request, res: Response) => {
+    const [ usuario, created ] = await User.findOrCreate({
+        where: { age: 27 },
+        defaults: {
+            name: 'Lucas'
+        }
+    });
 
-    let result = await User.findAll({ where: { id: 7 } });
-    if(result.length > 0){
-        let usuario = result[0];
-        usuario.name = 'Claudio';
-        usuario.age = 46;
-        await usuario.save();
-    }
-    console.log(result);
+    console.log("USUARIO: ", usuario);
+    console.log("CREATED: ", created);
+
+
+
+
+
 
     let users = await User.findAll({
-        order: ['age']
+        order: ['age','name']
     });
     
     let age: number = 90;
@@ -34,37 +39,8 @@ export const home = async (req: Request, res: Response) => {
         showOld,
         products: list,
         expensives: expensiveList,
-        frasesDoDia: [],
+        frasesDoDia: ['Bom dia flor do dia'],
         users
     });
 };
 
-export const CreateNewUser = async (req: Request, res: Response) => {
-    let newUserName: string = req.body.name;
-    let newUserAge: number = parseInt(req.body.age);
-
-    if(newUserName){
-        let firstLetterUpperCase = newUserName[0].toUpperCase();
-        if(newUserAge){
-            const newUser = User.build({
-                name: firstLetterUpperCase + newUserName.slice(1),
-                age: newUserAge
-            });
-            console.log("Id: ", newUser.id);
-            console.log("Nome: ", newUser.name);
-            console.log("Idade: ", newUser.age);
-        } else {
-            const newUser = User.build({
-                name: firstLetterUpperCase + newUserName.slice(1)
-            });
-            console.log("Id: ", newUser.id);
-            console.log("Nome: ", newUser.name); 
-            console.log("Idade: ", newUser.age);
-        }
-
-        // await newUser.save();
-
-        
-    }
-    res.redirect('/');
-};

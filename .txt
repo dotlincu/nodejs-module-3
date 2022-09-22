@@ -21,7 +21,7 @@ order: [
 offset: 2,  // pula 2 itens
 limit: 3,   // mostra 3 por page  
 
-
+-------------------------------------------------
 --- Inserir dados com sequelize
 
 // build + save 
@@ -42,12 +42,45 @@ try {
     console.error(e.message);
 }
 
-
+-------------------------------------------------
+-- Atualizar dados
 // update
 1 . Dados a serem alterados
 2 . Condição para encontrar o(os) itens
 await User.update({ name: 'Seu Chico', age: 53 }, {
-        where: {
-            id: 4
-        }
+    where: {
+        id: 4
+    }
 });
+
+usando findAll
+let result = await User.findAll({ where: { id: 7 } });
+if(result.length > 0){
+    let usuario = result[0];
+    usuario.name = 'Claudio';
+    usuario.age = 46;
+    await usuario.save();
+}
+
+-------------------------------------------------
+-- Deletar dados
+await User.destroy({
+    where: {}
+})
+
+let result = await User.findAll({ where: { id: 7 } });
+if(result.length > 0){
+    let usuario = result[0];
+
+    await usuario.destroy();
+}
+
+-------------------------------------------------
+-- Buscar dados
+let usuario = await User.findOne({
+    where: {
+        id: 1
+    }
+});
+
+let usuario = await User.findByPk(1);

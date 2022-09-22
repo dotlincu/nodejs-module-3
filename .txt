@@ -1,0 +1,53 @@
+ORM = Object Relacional Mapper
+Mapeamento objeto-relacional
+
+--- Op do sequelize
+where: {
+    age: {
+        [Op.gt]: 40,    // > 40
+        [Op.gte]: 40,   // >= 40
+        [Op.lt]: 40,    // < 40
+        [Op.lte]: 40,   // <= 40
+        [Op.between]: [40, 70],     // 40 ~ 70
+        [Op.notBetween]: [5, 10]    // not 5 ~ 10
+    },
+    name: {
+        [Op.like]: 'pa%',   // comeca com 'pa'
+    }
+},
+order: [
+    ['age', 'DESC']
+],
+offset: 2,  // pula 2 itens
+limit: 3,   // mostra 3 por page  
+
+
+--- Inserir dados com sequelize
+
+// build + save 
+const user = User.build({
+    name: '',
+    age: ''
+});
+await user.save();
+
+// create
+let user;
+try {
+    await User.create({
+        name:'Fulano',
+        age: 15
+    });    
+} catch (e: any) {
+    console.error(e.message);
+}
+
+
+// update
+1 . Dados a serem alterados
+2 . Condição para encontrar o(os) itens
+await User.update({ name: 'Seu Chico', age: 53 }, {
+        where: {
+            id: 4
+        }
+});

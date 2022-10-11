@@ -84,3 +84,8 @@ let usuario = await User.findOne({
 });
 
 let usuario = await User.findByPk(1);
+
+3 FORMAS DE UTILIZAR O MODEL
+1. Usar o Model no Controller para as modificações.
+2. Criar métodos dentro do próprio Model.
+3. Utilizando "services"
